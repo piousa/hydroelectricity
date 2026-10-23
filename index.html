@@ -1,0 +1,305 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maths Presentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f0f8f6;--bg2:#e0f0ed;--fg:#0a2430;--mut:#4d6b75;--card:#fff;--line:#c9e0dc;--pos:#0a9d8f;--neg:#d9822b;--sig:#3a5bff;--shadow:0 1px 0 #fff inset,0 20px 40px -24px rgba(10,36,48,.35);color-scheme:light}
+:root:not([data-theme="light"]){}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#06161d;--bg2:#0a212b;--fg:#e6f6f3;--mut:#8fb0b8;--card:#0c2631;--line:#173a47;--pos:#3fe0cc;--neg:#ffb454;--sig:#7d97ff;--shadow:0 24px 50px -28px #000;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#06161d;--bg2:#0a212b;--fg:#e6f6f3;--mut:#8fb0b8;--card:#0c2631;--line:#173a47;--pos:#3fe0cc;--neg:#ffb454;--sig:#7d97ff;--shadow:0 24px 50px -28px #000;color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 1.05rem/1.65 'Bricolage Grotesque',system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-weight:800;letter-spacing:-.045em;line-height:1;margin:0;text-wrap:balance}
+p{margin:0;text-wrap:pretty;max-width:62ch}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--sig);outline-offset:3px;border-radius:8px}
+.wrap{width:min(1120px,100% - 40px);margin-inline:auto}
+.mono{font-family:'IBM Plex Mono',monospace}
+/* nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin:14px auto 0;width:min(1120px,100% - 24px);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 10px 8px 20px;border-radius:99px;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+nav b{font-weight:800;letter-spacing:-.04em;font-size:1.15rem}
+nav div{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav a{text-decoration:none;font-size:.9rem;padding:7px 14px;border-radius:99px;color:var(--mut);white-space:nowrap;transition:background .2s,color .2s}
+nav a:hover,nav a.on{background:var(--bg2);color:var(--fg)}
+#theme{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);flex:none}
+@media(max-width:560px){nav{padding:8px 8px 8px 16px}nav b{font-size:.95rem}nav a{padding:7px 10px;font-size:.84rem}}
+/* gauge */
+#gauge{position:fixed;right:10px;top:50%;translate:0 -50%;width:6px;height:min(40vh,320px);border-radius:9px;background:var(--line);z-index:15;overflow:hidden}
+@media(max-width:700px){#gauge{display:none}}
+#gauge i{position:absolute;inset:auto 0 0;height:0;background:linear-gradient(var(--sig),var(--pos));border-radius:9px}
+/* hero */
+.hero{position:relative;min-height:min(92svh,860px);display:grid;align-items:end;margin-top:-66px;padding:130px 0 64px;overflow:hidden}
+.hero canvas,.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .wrap{position:relative;pointer-events:none}
+.hero h1{font-size:clamp(3.2rem,11vw,9.2rem);max-width:11ch}
+.hero h1 em{font-style:normal;color:var(--pos)}
+.hero p{margin-top:26px;font-size:clamp(1.05rem,2vw,1.35rem);color:var(--mut)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;pointer-events:auto}
+.btn{display:inline-block;text-decoration:none;padding:14px 24px;border-radius:99px;font-weight:600;border:1px solid var(--line);background:var(--card);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.btn.pri{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.hint{position:absolute;right:24px;bottom:20px;font-size:.8rem;color:var(--mut)}
+@media(max-width:700px){.hint{left:24px;right:24px;text-align:center}}
+@media(hover:none){.hint{display:none}}
+/* sections */
+section{padding:clamp(70px,10vw,130px) 0}
+section.alt{background:var(--bg2)}
+.head{display:grid;gap:18px;margin-bottom:46px}
+.head h2{font-size:clamp(2.2rem,5.5vw,4.4rem);max-width:16ch}
+.head p{color:var(--mut)}
+.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px;box-shadow:var(--shadow)}
+.card h3{font-size:1.5rem;margin-bottom:12px}
+.card p{color:var(--mut);font-size:.98rem}
+.eq{display:block;margin-top:20px;padding:14px 16px;border-radius:14px;background:var(--bg2);font-family:'IBM Plex Mono',monospace;font-size:.88rem;overflow-x:auto;white-space:nowrap}
+.card:nth-child(2){margin-top:34px}.card:nth-child(3){margin-top:68px}
+@media(max-width:760px){.card:nth-child(n){margin-top:0}}
+/* lab */
+.lab{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:900px){.lab{grid-template-columns:2fr 1fr}}
+.stage{position:relative;aspect-ratio:4/3;border-radius:26px;overflow:hidden;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);touch-action:pan-y}
+.panel{display:grid;gap:18px;align-content:start}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:var(--bg2);padding:5px;border-radius:14px}
+.seg button{border:0;background:transparent;padding:10px 6px;min-height:44px;border-radius:10px;font-size:.88rem;font-weight:500;transition:background .2s}
+.seg button[aria-pressed=true]{background:var(--card);box-shadow:var(--shadow);font-weight:600}
+label{display:grid;gap:8px;font-size:.92rem;color:var(--mut)}
+label span{display:flex;justify-content:space-between}
+label output{color:var(--fg);font-family:'IBM Plex Mono',monospace}
+input[type=range]{width:100%;accent-color:var(--pos)}
+.read{display:grid;gap:10px;padding:20px;border-radius:20px;background:var(--card);border:1px solid var(--line)}
+.read div{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.read b{font-family:'IBM Plex Mono',monospace;font-size:1.25rem;font-weight:500;transition:color .3s}
+.read small{color:var(--mut)}
+#verdict{font-size:.92rem;color:var(--mut);min-height:3.2em}
+/* power */
+.pw{display:grid;gap:30px}
+@media(min-width:900px){.pw{grid-template-columns:1fr 1fr;align-items:center}}
+.big{font-size:clamp(3.4rem,10vw,7.5rem);font-weight:800;letter-spacing:-.06em;line-height:.95}
+.big small{font-size:.32em;color:var(--mut);letter-spacing:0;margin-left:8px}
+.bar{height:14px;border-radius:9px;background:var(--line);overflow:hidden;margin:20px 0 14px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sig),var(--pos));border-radius:9px;transition:width .5s cubic-bezier(.16,1,.3,1)}
+/* cases */
+.case{display:grid;gap:14px;align-content:space-between}
+.case .btn{justify-self:start;padding:10px 18px;font-size:.92rem}
+.tag{font-family:'IBM Plex Mono',monospace;font-size:.85rem}
+.pos{color:var(--pos)}.neg{color:var(--neg)}
+/* footer */
+footer{position:relative;overflow:hidden;background:#05141b;color:#e6f6f3;padding:clamp(80px,12vw,150px) 0 34px}
+footer .loop{position:absolute;right:-6%;top:-14%;font-size:min(70vw,620px);line-height:1;color:#3fe0cc;opacity:.07;animation:spin 60s linear infinite;pointer-events:none}
+@keyframes spin{to{rotate:360deg}}
+footer h2{font-size:clamp(2.4rem,7vw,6rem);max-width:12ch;position:relative}
+footer h2 span{color:#ffb454}
+footer p{color:#8fb0b8;margin-top:22px;position:relative}
+footer .btn{background:#ffb454;color:#2a1700;border:0;position:relative}
+footer .btn.g{background:transparent;color:#e6f6f3;border:1px solid #1d4655}
+.fb{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;margin-top:70px;padding-top:22px;border-top:1px solid #12333f;font-size:.85rem;color:#6d8f98;position:relative}
+/* reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}footer .loop{animation:none}}
+</style>
+</head>
+<body>
+<nav aria-label="Main">
+  <b>Maths Presentation</b>
+  <div><a href="#idea">The idea</a><a href="#lab">Circulation lab</a><a href="#power">Power</a><a href="#cases">Cases</a></div>
+  <button id="theme" type="button" aria-label="Toggle light and dark theme">◐</button>
+</nav>
+<div id="gauge" aria-hidden="true"><i></i></div>
+
+<header class="hero">
+  <canvas id="hc" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <h1>Water has a <em>spin.</em></h1>
+    <p>Every turbine lives or dies by how much rotation its water carries. A line integral around a loop turns that swirl into one number you can design with.</p>
+    <div class="cta"><a class="btn pri" href="#lab">Play with the swirl</a><a class="btn" href="#power">Size a power plant</a></div>
+  </div>
+  <div class="hint mono">move your cursor: you are the vortex</div>
+</header>
+
+<section id="idea">
+  <div class="wrap">
+    <div class="head rv"><h2>One loop, one number</h2><p>Draw a closed loop in a flowing river and add up how much the water pushes along it. That total is circulation, and it is what a turbine blade turns into torque.</p></div>
+    <div class="trio">
+      <article class="card rv"><h3>Line integral</h3><p>Dot the velocity field with each tiny step along the loop. Positive means the flow runs with you.</p><code class="eq">Γ = ∮ F · dr</code></article>
+      <article class="card rv" style="--d:.1s"><h3>Green’s theorem</h3><p>Skip the loop: add up the local curl inside it instead. Both routes give the same answer, which the lab checks live.</p><code class="eq">Γ = ∬ (∂Q/∂x − ∂P/∂y) dA</code></article>
+      <article class="card rv" style="--d:.2s"><h3>Euler’s turbine</h3><p>Change in swirl across the runner is torque on the shaft. More useful swirl in, more electricity out.</p><code class="eq">τ = ρ Q Δ(r·Vθ)</code></article>
+    </div>
+  </div>
+</section>
+
+<section id="lab" class="alt">
+  <div class="wrap">
+    <div class="head rv"><h2>Circulation lab</h2><p>Pick a flow, resize the loop, and watch the integral. Teal arrows push with the loop, amber ones push against it.</p></div>
+    <div class="lab rv">
+      <div class="stage"><canvas id="lc" aria-label="Flow field with a circular loop and tangent arrows" role="img"></canvas><canvas id="lo" aria-hidden="true"></canvas></div>
+      <div class="panel">
+        <div class="seg" role="group" aria-label="Flow type">
+          <button type="button" data-f="rot" aria-pressed="true">Vortex</button>
+          <button type="button" data-f="uni" aria-pressed="false">Straight</button>
+          <button type="button" data-f="shr" aria-pressed="false">Shear</button>
+        </div>
+        <label><span>Flow strength ω <output id="ov">1.5</output></span><input id="om" type="range" min="-3" max="3" step=".1" value="1.5"></label>
+        <label><span>Loop radius r <output id="orr">1.6 m</output></span><input id="rr" type="range" min=".5" max="3" step=".1" value="1.6"></label>
+        <div class="read">
+          <div><small>Line integral</small><b id="gn">0</b></div>
+          <div><small>Green’s theorem</small><b id="gg">0</b></div>
+          <div><small>Difference</small><b id="gd">0</b></div>
+        </div>
+        <p id="verdict"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="power">
+  <div class="wrap pw">
+    <div class="rv">
+      <div class="head" style="margin-bottom:26px"><h2>Turn water into watts</h2><p>Once the runner catches the swirl, the plant’s output follows one line of physics.</p></div>
+      <code class="eq">P = η · ρ · g · Q · H</code>
+      <div style="display:grid;gap:18px;margin-top:26px">
+        <label><span>Flow Q <output id="qo"></output></span><input id="q" type="range" min="1" max="200" value="40"></label>
+        <label><span>Head H <output id="ho"></output></span><input id="h" type="range" min="1" max="300" value="60"></label>
+        <label><span>Efficiency η <output id="eo"></output></span><input id="e" type="range" min="40" max="95" value="88"></label>
+      </div>
+    </div>
+    <div class="rv" style="--d:.12s">
+      <div class="big" id="pk">0<small id="pu">MW</small></div>
+      <div class="bar"><i id="pb"></i></div>
+      <p id="homes" style="color:var(--mut)"></p>
+    </div>
+  </div>
+</section>
+
+<section id="cases" class="alt">
+  <div class="wrap">
+    <div class="head rv"><h2>Three runners, three fates</h2><p>Load each case into the lab and see why geometry decides whether a turbine earns or just churns water.</p></div>
+    <div class="trio">
+      <article class="card case rv"><div><h3>Vortex capture</h3><p>A Kaplan runner sitting in a rotating flow. Velocity lines up with the loop everywhere.</p></div><span class="tag pos">Γ &gt; 0 · strong torque</span><button class="btn" data-case="rot" data-w="2" type="button">Load in lab</button></article>
+      <article class="card case rv" style="--d:.1s"><div><h3>Laminar bypass</h3><p>Straight flow through a symmetric tube. The push on the way in cancels the push on the way out.</p></div><span class="tag">Γ = 0 · no torque</span><button class="btn" data-case="uni" data-w="2" type="button">Load in lab</button></article>
+      <article class="card case rv" style="--d:.2s"><div><h3>Backflow eddies</h3><p>Reverse recirculation fights the runner. It costs efficiency and chews blades through cavitation.</p></div><span class="tag neg">Γ &lt; 0 · drag loss</span><button class="btn" data-case="rot" data-w="-2" type="button">Load in lab</button></article>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="loop" aria-hidden="true">∮</div>
+  <div class="wrap">
+    <h2>You scrolled the whole loop. <span>Net work done: zero.</span></h2>
+    <p>You ended exactly where you started, only slightly smarter and mildly dizzy. Conservative page, non-conservative curiosity.</p>
+    <div class="cta"><button class="btn g" id="up" type="button">Take me back up</button></div>
+    <div class="fb"><span>Maths Presentation · Experiment 8</span><span>No fluids were harmed. Several integrals were.</span></div>
+  </div>
+</footer>
+
+<script>
+(()=>{
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+let col={};const readCol=()=>col={pos:css('--pos'),neg:css('--neg'),sig:css('--sig')};readCol();
+
+/* theme */
+const root=document.documentElement;
+$('#theme').onclick=()=>{const dark=matchMedia('(prefers-color-scheme: dark)').matches;const cur=root.dataset.theme||(dark?'dark':'light');root.dataset.theme=cur==='dark'?'light':'dark';readCol();drawLab()};
+
+/* flow engine */
+function flow(cv,ov,o){
+  const x=cv.getContext('2d'),y=ov&&ov.getContext('2d');let w=0,h=0,s=1,P=[],vis=true,run=false,t=0;
+  function size(){const r=cv.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);if(!r.width)return;w=r.width;h=r.height;[cv,ov].forEach(c=>{if(c){c.width=w*d;c.height=h*d}});x.setTransform(d,0,0,d,0,0);if(y)y.setTransform(d,0,0,d,0,0);s=h/(2*o.L)}
+  const sp=p=>{p.x=(Math.random()*2-1)*o.L*w/h;p.y=(Math.random()*2-1)*o.L;p.a=Math.random()*o.life|0};
+  function init(){size();P=Array.from({length:o.n},()=>{const p={};sp(p);return p})}
+  function frame(){
+    run=false;if(!vis||document.hidden)return;t+=.016;
+    x.globalCompositeOperation='destination-out';x.fillStyle='rgba(0,0,0,'+o.fade+')';x.fillRect(0,0,w,h);x.globalCompositeOperation='source-over';
+    x.lineWidth=o.lw;x.lineCap='round';
+    for(const p of P){
+      const [u,v]=o.field(p.x,p.y,t),px=w/2+p.x*s,py=h/2-p.y*s;
+      p.x+=u*o.dt;p.y+=v*o.dt;p.a++;
+      const sx=w/2+p.x*s,sy=h/2-p.y*s,m=Math.hypot(u,v);
+      x.strokeStyle=o.color(m,u,v);x.globalAlpha=o.alpha;x.beginPath();x.moveTo(px,py);x.lineTo(sx,sy);x.stroke();
+      if(p.a>o.life||Math.abs(p.x)>o.L*w/h||Math.abs(p.y)>o.L)sp(p);
+    }
+    x.globalAlpha=1;
+    if(y){y.clearRect(0,0,w,h);o.over(y,w,h,s)}
+    go();
+  }
+  const go=()=>{if(!run&&!rm){run=true;requestAnimationFrame(frame)}};
+  new IntersectionObserver(e=>{vis=e[0].isIntersecting;if(vis)go()}).observe(cv);
+  new ResizeObserver(()=>{size()}).observe(cv);
+  document.addEventListener('visibilitychange',go);
+  init();go();
+  return {go,size,init,get dims(){return{w,h,s}}};
+}
+
+/* hero: cursor vortex, tightens as you scroll */
+const hc=$('#hc'),M={x:.9,y:.2};let swirl=1.6;
+hc.parentElement.addEventListener('pointermove',e=>{const r=hc.getBoundingClientRect();M.x=((e.clientX-r.left)/r.width*2-1)*3*r.width/r.height;M.y=-((e.clientY-r.top)/r.height*2-1)*3},{passive:true});
+M.x=2.2;M.y=0.6;
+flow(hc,null,{L:3,n:matchMedia('(max-width:700px)').matches?260:520,life:160,fade:.07,lw:1.4,alpha:.8,dt:.016,
+  field(x,y,t){const dx=x-M.x,dy=y-M.y,r2=dx*dx+dy*dy+.35;return[.9+.3*Math.sin(y*1.3+t)+(-dy*swirl/r2)*1.4,.25*Math.cos(x*1.1+t*.8)+(dx*swirl/r2)*1.4]},
+  color:(m,u,v)=>m>1.5?col.pos:col.sig});
+
+/* lab */
+const L={f:'rot',w:1.5,r:1.6};
+const F=(x,y)=>L.f==='rot'?[-L.w*y,L.w*x]:L.f==='uni'?[L.w,0]:[L.w*y,0];
+const fmt=n=>(Math.abs(n)<5e-4?0:n).toFixed(3);
+function integrate(){let g=0;const N=720,dth=2*Math.PI/N;for(let k=0;k<N;k++){const a=k*dth,[u,v]=F(L.r*Math.cos(a),L.r*Math.sin(a));g+=(u*-L.r*Math.sin(a)+v*L.r*Math.cos(a))*dth}
+  const green=L.f==='rot'?2*L.w*Math.PI*L.r*L.r:L.f==='uni'?0:-L.w*Math.PI*L.r*L.r;return[g,green]}
+function readout(){const[g,gr]=integrate();$('#gn').textContent=fmt(g);$('#gg').textContent=fmt(gr);$('#gd').textContent=Math.abs(g-gr).toExponential(1);
+  const c=Math.abs(g)<.005?'var(--fg)':g>0?'var(--pos)':'var(--neg)';$('#gn').style.color=c;
+  $('#verdict').textContent=Math.abs(g)<.005?'No net circulation: the push along the top cancels the push along the bottom, so a turbine here earns nothing.':g>0?'Positive circulation: the water carries spin with the loop, the good kind of torque.':'Negative circulation: the water fights the loop. Expect drag, eddies and wasted power.';
+  $('#ov').textContent=L.w.toFixed(1);$('#orr').textContent=L.r.toFixed(1)+' m'}
+let lab;
+function drawLab(){readout();lab&&lab.go()}
+lab=flow($('#lc'),$('#lo'),{L:3.4,n:matchMedia('(max-width:700px)').matches?180:380,life:130,fade:.09,lw:1.3,alpha:.75,dt:.02,
+  field:(x,y)=>{const[u,v]=F(x,y);const k=L.f==='rot'?.45:.9;return[u*k,v*k]},
+  color:(m,u,v)=>L.f==='rot'?(L.w>=0?col.pos:col.neg):L.f==='uni'?col.sig:col.sig,
+  over(c,w,h,s){
+    c.lineWidth=2.2;c.strokeStyle=css('--fg');c.globalAlpha=.85;c.beginPath();c.arc(w/2,h/2,L.r*s,0,7);c.stroke();c.globalAlpha=1;
+    for(let k=0;k<16;k++){const a=k/16*Math.PI*2,X=L.r*Math.cos(a),Y=L.r*Math.sin(a),[u,v]=F(X,Y),tx=-Math.sin(a),ty=Math.cos(a),d=u*tx+v*ty,sx=w/2+X*s,sy=h/2-Y*s,len=Math.max(-26,Math.min(26,d*9));
+      if(Math.abs(len)<2)continue;c.strokeStyle=d>0?col.pos:col.neg;c.fillStyle=c.strokeStyle;c.lineWidth=3;const ex=sx+tx*len,ey=sy-ty*len;c.beginPath();c.moveTo(sx,sy);c.lineTo(ex,ey);c.stroke();
+      const q=Math.atan2(-ty*len,tx*len);c.beginPath();c.moveTo(ex,ey);c.lineTo(ex-7*Math.cos(q-.5),ey-7*Math.sin(q-.5));c.lineTo(ex-7*Math.cos(q+.5),ey-7*Math.sin(q+.5));c.fill()}}});
+$$('.seg button').forEach(b=>b.onclick=()=>setF(b.dataset.f));
+function setF(f){L.f=f;$$('.seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===f));drawLab()}
+$('#om').oninput=e=>{L.w=+e.target.value;drawLab()};
+$('#rr').oninput=e=>{L.r=+e.target.value;drawLab()};
+$$('[data-case]').forEach(b=>b.onclick=()=>{L.w=+b.dataset.w;$('#om').value=L.w;setF(b.dataset.case);$('#lab').scrollIntoView({behavior:rm?'auto':'smooth'})});
+readout();
+
+/* power */
+let shown=0,target=0,tw=0;
+function power(){const q=+$('#q').value,h=+$('#h').value,e=+$('#e').value/100,kw=e*9.81*q*h;
+  $('#qo').textContent=q+' m³/s';$('#ho').textContent=h+' m';$('#eo').textContent=Math.round(e*100)+'%';
+  target=kw;$('#pb').style.width=Math.min(100,Math.sqrt(kw/(.95*9.81*200*300))*100)+'%';
+  $('#homes').textContent='Enough for about '+Math.round(kw/1.2).toLocaleString()+' homes running around the clock.';
+  if(!tw){tw=1;requestAnimationFrame(tick)}}
+function tick(){shown+=(target-shown)*.14;if(Math.abs(target-shown)<.5)shown=target;
+  const mw=shown>=1000;$('#pk').firstChild.nodeValue=mw?(shown/1000).toFixed(shown>=1e4?1:2):Math.round(shown).toLocaleString();$('#pu').textContent=mw?'MW':'kW';
+  if(shown!==target)requestAnimationFrame(tick);else tw=0}
+['#q','#h','#e'].forEach(i=>$(i).oninput=power);power();
+
+/* reveal + nav + gauge + hero swirl */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+$$('.rv').forEach(el=>io.observe(el));
+const links=$$('nav a');
+new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.hash==='#'+e.target.id))}),{rootMargin:'-40% 0px -50% 0px'}).observe&&$$('section[id]').forEach(s=>new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.hash==='#'+e.target.id))}),{rootMargin:'-40% 0px -50% 0px'}).observe(s));
+const gi=$('#gauge i');let tk=false;
+addEventListener('scroll',()=>{if(tk)return;tk=true;requestAnimationFrame(()=>{const m=document.documentElement.scrollHeight-innerHeight,p=m>0?scrollY/m:0;gi.style.height=p*100+'%';swirl=1.6+p*4.5;tk=false})},{passive:true});
+
+/* footer */
+$('#up').onclick=()=>scrollTo({top:0,behavior:rm?'auto':'smooth'});
+})();
+</script>
+</body>
+</html>
+
+</body></html>
