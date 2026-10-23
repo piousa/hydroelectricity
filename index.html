@@ -60,6 +60,13 @@ section.alt{background:var(--bg2)}
 .card h3{font-size:1.5rem;margin-bottom:12px}
 .card p{color:var(--mut);font-size:.98rem}
 .eq{display:block;margin-top:20px;padding:14px 16px;border-radius:14px;background:var(--bg2);font-family:'IBM Plex Mono',monospace;font-size:.88rem;overflow-x:auto;white-space:nowrap}
+/* code */
+.codecard{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px;box-shadow:var(--shadow)}
+.codecard .tophdr{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.codecard h3{font-size:1.4rem}
+.codecard .lang{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--mut);padding:4px 10px;border:1px solid var(--line);border-radius:99px}
+pre.code{display:block;margin:0;padding:20px;border-radius:14px;background:var(--bg2);font-family:'IBM Plex Mono',monospace;font-size:.82rem;line-height:1.7;overflow-x:auto;white-space:pre;color:var(--fg)}
+pre.code .c{color:var(--mut)}
 .card:nth-child(2){margin-top:34px}.card:nth-child(3){margin-top:68px}
 @media(max-width:760px){.card:nth-child(n){margin-top:0}}
 /* lab */
@@ -132,6 +139,32 @@ footer .btn.g{background:transparent;color:#e6f6f3;border:1px solid #1d4655}
       <article class="card rv"><h3>Line integral</h3><p>Dot the velocity field with each tiny step along the loop. Positive means the flow runs with you.</p><code class="eq">Γ = ∮ F · dr</code></article>
       <article class="card rv" style="--d:.1s"><h3>Green’s theorem</h3><p>Skip the loop: add up the local curl inside it instead. Both routes give the same answer, which the lab checks live.</p><code class="eq">Γ = ∬ (∂Q/∂x − ∂P/∂y) dA</code></article>
       <article class="card rv" style="--d:.2s"><h3>Euler’s turbine</h3><p>Change in swirl across the runner is torque on the shaft. More useful swirl in, more electricity out.</p><code class="eq">τ = ρ Q Δ(r·Vθ)</code></article>
+    </div>
+    <div class="codecard rv" style="--d:.25s;margin-top:20px">
+      <div class="tophdr"><h3>GNU Octave Code</h3><span class="lang">GNU Octave / MATLAB</span></div>
+      <p style="margin-bottom:18px">Octave Code to verify a sample data .</p>
+      <pre class="code"><span class="c">% Hydrospin: circulation of a 2D vortex flow</span>
+<span class="c">% Field: F(x,y) = [-w*y, w*x]   (solid-body rotation)</span>
+w = 1.5;        <span class="c">% flow strength (rad/s)</span>
+r = 1.6;        <span class="c">% loop radius (m)</span>
+N = 720;        <span class="c">% integration steps</span>
+
+theta  = linspace(0, 2*pi, N+1)(1:end-1);
+dtheta = 2*pi / N;
+
+x = r*cos(theta);  y = r*sin(theta);
+u = -w*y;          v =  w*x;          <span class="c">% velocity field F(x,y)</span>
+tx = -r*sin(theta); ty = r*cos(theta); <span class="c">% tangent to the loop</span>
+
+<span class="c">% Route 1: line integral  Gamma = oint F . dr</span>
+gamma_line = sum(u.*tx + v.*ty) * dtheta;
+
+<span class="c">% Route 2: Green's theorem  Gamma = curl(F) * Area</span>
+gamma_green = 2*w * pi*r^2;
+
+printf("Line integral   : %.4f\n", gamma_line);
+printf("Green's theorem : %.4f\n", gamma_green);
+printf("Difference      : %.2e\n", abs(gamma_line - gamma_green));</pre>
     </div>
   </div>
 </section>
